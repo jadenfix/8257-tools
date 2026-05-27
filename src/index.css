@@ -1,0 +1,104 @@
+:root {
+  --bg: #f5f7f6;
+  --surface: #ffffff;
+  --wash: #eef3f1;
+  --ink: #16211c;
+  --muted: #65726b;
+  --line: #dce4df;
+  --line-strong: #c8d3cd;
+  --accent: #0f8b8d;
+  --accent-strong: #0a5f64;
+  --focus: rgba(15, 139, 141, 0.24);
+  --green: #137a3b;
+  --green-wash: #e7f5eb;
+  --green-line: #b8dcc4;
+  --red: #c2392b;
+  --red-wash: #fdecea;
+  --red-line: #f4b7b0;
+  --amber: #a35f00;
+  --amber-wash: #fff4df;
+  --amber-line: #ecc785;
+  --teal-wash: #e3f5f4;
+  --code-bg: #edf0ed;
+  --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+
+  color: var(--ink);
+  background: var(--bg);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-synthesis: none;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  letter-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--ink);
+  font-weight: 850;
+  line-height: 1.08;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 21px;
+}
+
+h4 {
+  font-size: 15px;
+}
+
+a {
+  color: inherit;
+}
+
+svg {
+  flex: 0 0 auto;
+}
+
+::selection {
+  background: var(--teal-wash);
+}
