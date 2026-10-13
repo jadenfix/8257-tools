@@ -195,12 +195,23 @@ const evaluateRequirement = (
       }
     }
     case 'composite': {
-      const passed = rule.operator === 'AND'
+      const children = rule.children.flatMap((kind) =>
+        tool.access.filter((child) => child.rule.kind === kind && child.rule.kind !== 'composite'),
+      )
+      const complete = rule.children.length > 0 && rule.children.every((kind) =>
+        kind !== 'composite' && children.some((child) => child.rule.kind === kind),
+      )
+      const checks = children.map((child) => evaluateRequirement(tool, wallet, child))
+      const passed = complete && (rule.operator === 'AND'
+        ? checks.every((check) => check.passed)
+        : checks.some((check) => check.passed))
       return {
         requirement,
         passed,
-        reason: `Composite ${rule.operator} gate references ${rule.children.join(', ')}.`,
-        current: passed ? 'composable' : 'requires simulation',
+        reason: complete
+          ? `Composite ${rule.operator}: ${checks.filter((check) => check.passed).length}/${checks.length} predicates passed.`
+          : 'Composite gate has missing, empty, or recursive predicate references.',
+        current: passed ? 'satisfied' : 'not satisfied',
       }
     }
     default:
@@ -220,7 +231,15 @@ export const checkAccess = (toolIdOrSlug: string, walletAddress: string): Access
   }
 
   const wallet = getWalletProfile(walletAddress)
-  const results = tool.access.map((requirement) => evaluateRequirement(tool, wallet, requirement))
+  // Composite gates own their referenced leaves. Applying those leaves again
+  // as independent AND requirements would make an OR gate impossible to pass.
+  const groupedKinds = new Set(tool.access.flatMap((requirement) =>
+    requirement.rule.kind === 'composite' ? requirement.rule.children : [],
+  ))
+  const roots = tool.access.filter((requirement) =>
+    requirement.rule.kind === 'composite' || !groupedKinds.has(requirement.rule.kind),
+  )
+  const results = roots.map((requirement) => evaluateRequirement(tool, wallet, requirement))
   const passed = results.filter((result) => result.passed)
   const failed = results.filter((result) => !result.passed)
   const access = failed.length === 0
@@ -246,7 +265,7 @@ export const validateManifest = (manifest: ToolManifest): ManifestValidation => 
     errors.push('Manifest name is required.')
   }
 
-  if (!manifest.version.trim()) {
+  if (!/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.test(manifest.version.trim())) {
     errors.push('Semantic version is required.')
   }
 
@@ -254,7 +273,9 @@ export const validateManifest = (manifest: ToolManifest): ManifestValidation => 
     errors.push('Description is required.')
   }
 
-  if (!manifest.invoke.url.startsWith('https://')) {
+  let endpoint: URL | undefined
+  try { endpoint = new URL(manifest.invoke.url) } catch { /* reported below */ }
+  if (!endpoint || endpoint.protocol !== 'https:' || !endpoint.hostname || endpoint.username || endpoint.password) {
     errors.push('Invocation URL must use HTTPS.')
   }
 
@@ -358,7 +379,8 @@ export const invokeTool = ({
       observedUptime: tool.uptime,
       gateway: {
         retries: 0,
-        signedRequest: true,
+        simulated: true,
+        signedRequest: false,
         predicateChecks: access.passed.length,
       },
     },

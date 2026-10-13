@@ -85,3 +85,37 @@ describe('invocation proxy simulation', () => {
     expect(result.error?.unlockActions).toContain('Subscribe to Risk Pro for $49/month.')
   })
 })
+
+
+describe('composite authorization', () => {
+  it('evaluates OR and AND against actual wallet predicates, and fails closed on missing children', () => {
+    const fixture = { ...tools[0], id: 'composite-test', slug: 'composite-test', access: [
+      { ...tools[0].access[0], id: 'subscription', rule: { kind: 'subscription' as const, contract: 'test', plan: 'absent', priceUsd: 0, period: 'month' as const } },
+      { ...tools[0].access[0], id: 'allowlist', rule: { kind: 'allowlist' as const, listId: 'dao-approved-tools' } },
+      { ...tools[0].access[0], id: 'gate', rule: { kind: 'composite' as const, operator: 'OR' as 'OR' | 'AND', children: ['subscription', 'allowlist'] as Array<'subscription' | 'allowlist' | 'nft'> } },
+    ] }
+    tools.push(fixture)
+    try {
+      expect(checkAccess('composite-test', walletProfiles[0].address).access).toBe(true)
+      expect(checkAccess('composite-test', walletProfiles[2].address).access).toBe(false)
+      const gate = fixture.access[2].rule
+      if (gate.kind !== 'composite') throw new Error('Expected composite')
+      gate.operator = 'AND'
+      expect(checkAccess('composite-test', walletProfiles[0].address).access).toBe(false)
+      gate.operator = 'OR'
+      gate.children = ['nft']
+      expect(checkAccess('composite-test', walletProfiles[0].address).access).toBe(false)
+      gate.children = []
+      expect(checkAccess('composite-test', walletProfiles[0].address).access).toBe(false)
+    } finally { tools.pop() }
+  })
+
+  it('rejects invalid endpoint and semantic version drafts', () => {
+    expect(validateManifest({ ...tools[0].manifest, version: 'latest' }).valid).toBe(false)
+    expect(validateManifest({ ...tools[0].manifest, invoke: { ...tools[0].manifest.invoke, url: 'https://' } }).valid).toBe(false)
+  })
+
+  it('does not claim that simulated calls are cryptographically signed', () => {
+    expect(invokeTool({ toolId: tools[0].id, wallet: walletProfiles[0].address, input: {} }).result?.gateway).toMatchObject({ simulated: true, signedRequest: false })
+  })
+})

@@ -129,7 +129,7 @@ function App() {
           </span>
           <span>
             <strong>8257Kit</strong>
-            <small>Agent tool gateway</small>
+            <small>Local gateway playground</small>
           </span>
         </a>
 
@@ -196,7 +196,8 @@ function TopBar({ navigate }: { navigate: (route: RouteKey) => void }) {
     <header className="topbar">
       <div>
         <p className="eyebrow">Composio-style infrastructure for ERC-8257</p>
-        <h1>Ship paid AI-agent tools onchain in 10 minutes.</h1>
+        <h1>Explore, gate, and debug agent tools.</h1>
+        <p>Local simulation · fixture wallets · sample analytics</p>
       </div>
       <div className="topbar-actions">
         <button className="secondary-button" type="button" onClick={() => navigate('docs')}>
