@@ -1,0 +1,90 @@
+{
+  "source_sha": "bf87991627645ed7ad6dbc35869ba0238777343d",
+  "source_tree": "910ea1965dc2cf2d83da87b86c3dd159e92197a3",
+  "inputs": [
+    {
+      "path": "eslint.config.js",
+      "git_blob_sha": "ef614d25c11dd1e89a8df0b2eaf934170b44daa8"
+    },
+    {
+      "path": "index.html",
+      "git_blob_sha": "804686622eee7096eb74e59d0967aceae22bf881"
+    },
+    {
+      "path": "package-lock.json",
+      "git_blob_sha": "520e8174a6302a802b7eb0f85b634468d1627bd7"
+    },
+    {
+      "path": "package.json",
+      "git_blob_sha": "a7444d780e6b18f9450f1f6852c364f6e6548693"
+    },
+    {
+      "path": "playwright.config.ts",
+      "git_blob_sha": "29148f07ff37340d177effe75ec21c859e411463"
+    },
+    {
+      "path": "public/favicon.svg",
+      "git_blob_sha": "6893eb13237060adc0c968a690149a49faa2d7d3"
+    },
+    {
+      "path": "src/App.css",
+      "git_blob_sha": "d6e0a36fbe7a62937e29279c06f097ad01f3a13c"
+    },
+    {
+      "path": "src/App.test.tsx",
+      "git_blob_sha": "60d42c83f3e69c3dde21612c5838a982b06b80b2"
+    },
+    {
+      "path": "src/App.tsx",
+      "git_blob_sha": "8ba918dac79000911643925777c8278e7aa845dd"
+    },
+    {
+      "path": "src/assets/hero.png",
+      "git_blob_sha": "02251f4b956c55af2d76fd0788124d7eee2b45eb"
+    },
+    {
+      "path": "src/data/tools.ts",
+      "git_blob_sha": "eacc947b14a59f5b6bb0fff7b12242412b74ceb0"
+    },
+    {
+      "path": "src/index.css",
+      "git_blob_sha": "da2c4512b865c9e76b16cb306da16594deca6fb8"
+    },
+    {
+      "path": "src/lib/gateway.test.ts",
+      "git_blob_sha": "e194a82ffd7f5b500c23f791c62eead1f4634163"
+    },
+    {
+      "path": "src/lib/gateway.ts",
+      "git_blob_sha": "ed4eb4f1f25476fe5000df7dfc8924a0e05cf357"
+    },
+    {
+      "path": "src/main.tsx",
+      "git_blob_sha": "bef5202a32cbd0632c43de40f6e908532903fd42"
+    },
+    {
+      "path": "src/test/setup.ts",
+      "git_blob_sha": "a9d0dd31aa6eae87f8689e99b802b92a020b30d9"
+    },
+    {
+      "path": "tests/e2e/app.spec.ts",
+      "git_blob_sha": "5127c0bd29c1da190b30580cd3c3edb3800afce9"
+    },
+    {
+      "path": "tsconfig.app.json",
+      "git_blob_sha": "7f42e5f7cd2e79c7b5a25b753e56b1bcf94e1381"
+    },
+    {
+      "path": "tsconfig.json",
+      "git_blob_sha": "1ffef600d959ec9e396d5a260bd3f5b927b2cef8"
+    },
+    {
+      "path": "tsconfig.node.json",
+      "git_blob_sha": "d3c52ea64c6cd6bad118474410f5322f48e257a6"
+    },
+    {
+      "path": "vite.config.ts",
+      "git_blob_sha": "35b8dfc09ab7a43dfa6e9cad47c3aa293341878e"
+    }
+  ]
+}

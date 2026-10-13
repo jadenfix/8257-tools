@@ -1,0 +1,21 @@
+{
+  "source_sha": "bf87991627645ed7ad6dbc35869ba0238777343d",
+  "duration_seconds": 39.1,
+  "capture_type": "sampled actual browser screenshots; measured timing; recording footer only",
+  "fixture_only": true,
+  "browser": "Chromium 153.0.8010.0",
+  "page_errors": [],
+  "blocked_remote_requests": [],
+  "sha256": {
+    "gateway.mp4": "9209cb2fff2010f1fe7392cd550ad1b0fe8a68d9729cb51145deb215d71f9cc1",
+    "gateway.gif": "87198f82397f08fbc06bf0e38cccaac90a2f06d67af3ce3c94b381eeaa745a5d",
+    "poster.png": "a42dd7b47dd7f498067354e95347560611cd0c84112289ce8bc17b34b198d9a1"
+  },
+  "verification": {
+    "unit_tests": 15,
+    "browser_desktop_mobile_tests": 16,
+    "lint": "pass",
+    "build": "pass",
+    "source_mutation_guard": "pass"
+  }
+}
