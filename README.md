@@ -2,6 +2,8 @@
 
 8257Kit is a Vite + React MVP for an ERC-8257 gateway: a Composio-style integration layer for onchain AI-agent tools.
 
+This is a local playground using fixture wallets and tool metadata. Invocations simulate access checks and responses; they do not send network requests, sign wallet messages, charge payments, or write to a blockchain. Dashboard metrics are sample data.
+
 ## Product surface
 
 - `/explore` indexes ERC-8257 tools with manifests, predicates, pricing, trust, uptime, and health.
@@ -13,11 +15,12 @@
 ## Commands
 
 ```bash
-npm install
+npm ci
 npm run dev
 npm run lint
 npm run test
 npm run build
+npx playwright install chromium
 npm run e2e
 ```
 
