@@ -1,5 +1,13 @@
 # 8257-tools
 
+## Browser demo
+
+![8257Kit fixture playground walkthrough](docs/demo/gateway.gif)
+
+[Watch the MP4](docs/demo/gateway.mp4) · [Recording provenance and verification](docs/demo/README.md)
+
+Actual frontend capture: discover tools, explain access, simulate an invocation and stage a manifest. Fixture wallets and sample analytics; no live blockchain or payment actions.
+
 8257Kit is a Vite + React MVP for an ERC-8257 gateway: a Composio-style integration layer for onchain AI-agent tools.
 
 This is a local playground using fixture wallets and tool metadata. Invocations simulate access checks and responses; they do not send network requests, sign wallet messages, charge payments, or write to a blockchain. Dashboard metrics are sample data.
